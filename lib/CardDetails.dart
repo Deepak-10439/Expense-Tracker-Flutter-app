@@ -29,7 +29,7 @@ class CardFrame extends StatelessWidget {
           children: [
             const Positioned(
               left: 22,
-              top: 20,
+              top: 10,
               child: Text(
                 'Total Balance',
                 style: TextStyle(
@@ -43,7 +43,7 @@ class CardFrame extends StatelessWidget {
             ),
             const Positioned(
               left: 22,
-              top: 132,
+              top: 85,  // Adjust this value if needed
               child: Text(
                 '**** **** **** 1234',
                 style: TextStyle(
@@ -57,7 +57,7 @@ class CardFrame extends StatelessWidget {
             ),
             const Positioned(
               left: 22,
-              top: 50,
+              top: 35,
               child: Text(
                 '\$23,345.43',
                 style: TextStyle(
