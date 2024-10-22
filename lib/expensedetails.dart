@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart'; // Import the intl package
 import 'models/transaction_data.dart'; // Import the new data class
 import 'models/transaction_repository.dart';
 
@@ -104,12 +105,13 @@ class TransactionsList extends StatelessWidget {
       itemCount: transactions.length,
       itemBuilder: (context, index) {
         final transaction = transactions[index];
+        final formattedDate = DateFormat('yyyy-MM-dd').format(transaction.date); // Format the date
         return Column(
           children: [
             TransactionItem(
               source: transaction.source,
               amount: transaction.amount.toString(),
-              date: transaction.date,
+              date: formattedDate, // Use the formatted date
               mode: transaction.mode,
               isIncome: transaction.isIncome,
             ),

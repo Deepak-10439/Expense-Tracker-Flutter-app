@@ -1,6 +1,7 @@
+import 'package:flutter/foundation.dart';
 import 'transaction_data.dart';
 
-class TransactionRepository {
+class TransactionRepository extends ChangeNotifier {
   static final TransactionRepository _instance = TransactionRepository._internal();
 
   factory TransactionRepository() {
@@ -13,7 +14,7 @@ class TransactionRepository {
     TransactionData(
       source: "Odunayo",
       amount: 400,
-      date: "09 May, 2022",
+      date: DateTime.parse("2022-05-09"),
       mode: "Credit",
       isIncome: true,
       category: "Salary",
@@ -21,7 +22,7 @@ class TransactionRepository {
     TransactionData(
       source: "Olayemi",
       amount: 200.45,
-      date: "07 May, 2022",
+      date: DateTime.parse("2022-05-07"),
       mode: "Transfer",
       isIncome: false,
       category: "Transfer",
@@ -29,7 +30,7 @@ class TransactionRepository {
     TransactionData(
       source: "Uber",
       amount: 36.45,
-      date: "07 May, 2022",
+      date: DateTime.parse("2022-05-07"),
       mode: "Debit Card",
       isIncome: false,
       category: "Transport",
@@ -37,7 +38,7 @@ class TransactionRepository {
     TransactionData(
       source: "Olayemi",
       amount: 200.45,
-      date: "07 May, 2022",
+      date: DateTime.parse("2022-05-07"),
       mode: "Transfer",
       isIncome: false,
       category: "Transfer",
@@ -45,7 +46,7 @@ class TransactionRepository {
     TransactionData(
       source: "Tasty Fried Chicken",
       amount: 50.32,
-      date: "08 May, 2022",
+      date: DateTime.parse("2022-05-08"),
       mode: "Debit Card",
       isIncome: false,
       category: "Food",
@@ -53,7 +54,7 @@ class TransactionRepository {
     TransactionData(
       source: "Nescafe",
       amount: 12.12,
-      date: "09 May, 2022",
+      date: DateTime.parse("2022-05-09"),
       mode: "Debit Card",
       isIncome: false,
       category: "Beverage",
@@ -61,7 +62,7 @@ class TransactionRepository {
     TransactionData(
       source: "Odunayo",
       amount: 400,
-      date: "09 May, 2022",
+      date: DateTime.parse("2022-05-09"),
       mode: "Credit",
       isIncome: true,
       category: "Salary",
@@ -69,7 +70,7 @@ class TransactionRepository {
     TransactionData(
       source: "Olayemi",
       amount: 200.45,
-      date: "07 May, 2022",
+      date: DateTime.parse("2022-05-07"),
       mode: "Transfer",
       isIncome: false,
       category: "Transfer",
@@ -77,7 +78,7 @@ class TransactionRepository {
     TransactionData(
       source: "Tasty Fried Chicken",
       amount: 50.32,
-      date: "08 May, 2022",
+      date: DateTime.parse("2022-05-08"),
       mode: "Debit Card",
       isIncome: false,
       category: "Food",
@@ -85,7 +86,7 @@ class TransactionRepository {
     TransactionData(
       source: "Nescafe",
       amount: 12.12,
-      date: "09 May, 2022",
+      date: DateTime.parse("2022-05-09"),
       mode: "Debit Card",
       isIncome: false,
       category: "Beverage",
@@ -93,7 +94,7 @@ class TransactionRepository {
     TransactionData(
       source: "Odunayo",
       amount: 400,
-      date: "09 May, 2022",
+      date: DateTime.parse("2022-05-09"),
       mode: "Credit",
       isIncome: true,
       category: "Salary",
@@ -101,4 +102,10 @@ class TransactionRepository {
   ];
 
   List<TransactionData> get transactions => _transactions;
+
+  void addTransaction(TransactionData transaction) {
+    _transactions.add(transaction);
+    _transactions.sort((a, b) => b.date.compareTo(a.date)); // Sort by DateTime descending
+    notifyListeners();
+  }
 }

@@ -1,8 +1,11 @@
 // ignore_for_file: library_private_types_in_public_api
 
 import 'package:flutter/material.dart';
-import 'homeScreen.dart';
+import 'new_expense.dart';
+import 'models/expenses.dart';
+import 'HomeScreen.dart';
 import 'chartscreen.dart';
+
 
 class BottomBar extends StatefulWidget {
   const BottomBar({super.key});
@@ -13,6 +16,26 @@ class BottomBar extends StatefulWidget {
 
 class _BottomBarState extends State<BottomBar> {
   int selectedItemIndex = 0;
+  void _addNewExpense(BuildContext context, Expense newExpense) {
+    
+  }
+  void _openAddExpenseOverlay(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (ctx) => Container(
+        decoration: BoxDecoration(
+          color: Theme.of(context).scaffoldBackgroundColor,
+          borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
+        ),
+        padding: EdgeInsets.only(
+          bottom: MediaQuery.of(context).viewInsets.bottom,
+        ),
+        child: NewExpense((expense) => _addNewExpense(context, expense)),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +68,7 @@ class _BottomBarState extends State<BottomBar> {
             label: "Add",
             isSelected: false, // No selection state for Add
             onClick: () {
-              // Handle Add click
+              _openAddExpenseOverlay(context);
             },
           ),
           BottomAppBarItem(

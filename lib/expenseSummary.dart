@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'models/transaction_repository.dart';
-import 'models/transaction_data.dart';
 
 // Data model to represent income and expense summary
 class ExpenseSummaryData {
@@ -11,13 +11,12 @@ class ExpenseSummaryData {
 }
 
 class IncomeExpenseSummary extends StatelessWidget {
-  // Remove the data parameter
   const IncomeExpenseSummary({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // Get transactions from the repository
-    final transactions = TransactionRepository().transactions;
+    // Listen to changes in the TransactionRepository
+    final transactions = Provider.of<TransactionRepository>(context).transactions;
 
     // Calculate total income and total expense
     final double totalIncome = transactions

@@ -1,3 +1,4 @@
+// ignore: file_names
 import 'package:flutter/material.dart';
 
 class DailyMonthlyWeeklyFrame extends StatefulWidget {
@@ -23,14 +24,14 @@ class _DailyMonthlyWeeklyFrameState extends State<DailyMonthlyWeeklyFrame> {
       },
       child: Container(
         decoration: BoxDecoration(
-          color: isSelected ? Color(0xfff3f3f3) : Color(0xff323232),
+          color: isSelected ? const Color(0xfff3f3f3) : const Color(0xff323232),
           borderRadius: BorderRadius.circular(15),
         ),
-        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
         child: Text(
           option,
           style: TextStyle(
-            color: isSelected ? Color(0xff323232) : Color(0xfff3f3f3),
+            color: isSelected ? const Color(0xff323232) : const Color(0xfff3f3f3),
             fontSize: 16,
             letterSpacing: 0.1,
             height: 1.5,
@@ -43,13 +44,13 @@ class _DailyMonthlyWeeklyFrameState extends State<DailyMonthlyWeeklyFrame> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 10), // Adjusted padding for better alignment
+      padding: const EdgeInsets.symmetric(horizontal: 10), // Adjusted padding for better alignment
       child: Container(
         decoration: BoxDecoration(
-          color: Color(0xff323232),
+          color: const Color(0xff323232),
           borderRadius: BorderRadius.circular(15),
         ),
-        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10), // More consistent padding
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10), // More consistent padding
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly, // Evenly distribute space
           children: [

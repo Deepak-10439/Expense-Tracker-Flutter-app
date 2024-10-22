@@ -3,8 +3,8 @@ import 'pieChart.dart';
 import 'expenseSummary.dart'; 
 import 'dailyMonthlyWeeklyFrame.dart'; 
 import 'Bottombar.dart';
-import 'new_expense.dart'; // Add this import
-import 'models/expenses.dart'; // Import the Expense model
+import 'new_expense.dart';
+import 'models/expenses.dart';
 
 class ChartScreen extends StatelessWidget {
   const ChartScreen({super.key});

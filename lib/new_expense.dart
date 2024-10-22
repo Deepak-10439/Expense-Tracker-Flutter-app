@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'models/expenses.dart';
 import 'models/transaction_data.dart';
 import 'models/transaction_repository.dart';
+import 'package:provider/provider.dart';
 
 class NewExpense extends StatefulWidget {
   final void Function(Expense) onAddExpense;
@@ -18,7 +19,7 @@ class NewExpense extends StatefulWidget {
 class _NewExpenseState extends State<NewExpense> {
   final _titleController = TextEditingController();
   final _amountController = TextEditingController();
-  Category _selectedCategory = Category.leisure;
+  Category _selectedCategory = Category.food;
   DateTime? _selectedDate;
 
   void _presentDatePicker() async {
@@ -84,15 +85,16 @@ class _NewExpenseState extends State<NewExpense> {
       return;
     }
     
-    // Add the new expense to the repository
-    TransactionRepository().transactions.add(
+    // Add the new expense to the repository using Provider
+    final transactionRepo = Provider.of<TransactionRepository>(context, listen: false);
+    transactionRepo.addTransaction(
       TransactionData(
         source: _titleController.text,
         amount: enteredAmount,
-        date: formatter.format(_selectedDate!),
-        mode: "Expense", // Assuming mode is "Expense" for new expenses
-        isIncome: false, // Assuming new expenses are not income
-        category: _selectedCategory.name, // Assuming category is a string
+        date: _selectedDate!,
+        mode: "Expense",
+        isIncome: false,
+        category: _selectedCategory.name,
       ),
     );
 
@@ -142,7 +144,7 @@ class _NewExpenseState extends State<NewExpense> {
                           maxLength: 50,
                           keyboardType: TextInputType.text,
                           decoration: const InputDecoration(
-                            label: Text('Express Title'),
+                            label: Text('Expense Title'),
                           ),
                         ),
                       ),
@@ -154,7 +156,7 @@ class _NewExpenseState extends State<NewExpense> {
                           controller: _amountController,
                           keyboardType: TextInputType.number,
                           decoration: const InputDecoration(
-                            prefixText: '\$ ',
+                            prefixText: '\₹ ',
                             label: Text('Amount'),
                           ),
                         ),
@@ -167,7 +169,7 @@ class _NewExpenseState extends State<NewExpense> {
                     maxLength: 50,
                     keyboardType: TextInputType.text,
                     decoration: const InputDecoration(
-                      label: Text('Express Title'),
+                      label: Text('Expense Title'),
                     ),
                   ),
                 if (width >= 600)
@@ -216,7 +218,7 @@ class _NewExpenseState extends State<NewExpense> {
                           controller: _amountController,
                           keyboardType: TextInputType.number,
                           decoration: const InputDecoration(
-                            prefixText: '\$ ',
+                            prefixText: '\₹ ',
                             label: Text('Amount'),
                           ),
                         ),

@@ -44,10 +44,6 @@ class PieChart extends StatelessWidget {
   Widget build(BuildContext context) {
     // Calculate the total sum of all expenses
     final total = data.fold(0.0, (sum, item) => sum + item.amount);
-
-    // Starting angle for the first slice
-    double startAngle = 0.0;
-
     // List of colors for the slices
     const colors = [
       Color(0xFF1F77B4), Color(0xFFFF7F0E), Color(0xFF2CA02C), Color(0xFFD62728),
