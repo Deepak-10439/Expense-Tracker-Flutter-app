@@ -35,7 +35,7 @@ class ChartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: const BottomBar(),
+      bottomNavigationBar: const BottomBar(selectedItemIndex: 2,),
       body: Column(
         children: [
           const SizedBox(height: 40),

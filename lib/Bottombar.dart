@@ -8,14 +8,15 @@ import 'chartscreen.dart';
 
 
 class BottomBar extends StatefulWidget {
-  const BottomBar({super.key});
+  final int selectedItemIndex; // Add this line
+
+  const BottomBar({super.key, required this.selectedItemIndex}); // Update constructor
 
   @override
   _BottomBarState createState() => _BottomBarState();
 }
 
 class _BottomBarState extends State<BottomBar> {
-  int selectedItemIndex = 0;
   void _addNewExpense(BuildContext context, Expense newExpense) {
     
   }
@@ -48,49 +49,47 @@ class _BottomBarState extends State<BottomBar> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           BottomAppBarItem(
-            imagePath: selectedItemIndex == 0
-                ? 'assets/images/home_outlined.png' // Replace with your selected image
-                : 'assets/images/home.png', // Replace with your unselected image
+            imagePath: widget.selectedItemIndex == 0
+                ? 'assets/images/home_outlined.png'
+                : 'assets/images/home.png',
             label: "Home",
-            isSelected: selectedItemIndex == 0,
+            isSelected: widget.selectedItemIndex == 0,
             onClick: () {
-              setState(() {
-                selectedItemIndex = 0;
-              });
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const HomeScreen()),
-              );
+              if (widget.selectedItemIndex != 0) { // Check if not already on Home
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const HomeScreen()),
+                );
+              }
             },
           ),
           BottomAppBarItem(
-            imagePath: 'assets/images/add.png', // Replace with your add image
+            imagePath: 'assets/images/add.png',
             label: "Add",
-            isSelected: false, // No selection state for Add
+            isSelected: false,
             onClick: () {
               _openAddExpenseOverlay(context);
             },
           ),
           BottomAppBarItem(
-            imagePath: selectedItemIndex == 2
-                ? 'assets/images/chart_selected.png' // Replace with your selected image
-                : 'assets/images/chart.png', // Replace with your unselected image
+            imagePath: widget.selectedItemIndex == 2
+                ? 'assets/images/chart_selected.png'
+                : 'assets/images/chart.png',
             label: "Chart",
-            isSelected: selectedItemIndex == 2,
+            isSelected: widget.selectedItemIndex == 2,
             onClick: () {
-              setState(() {
-                selectedItemIndex = 2;
-              });
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const ChartScreen()),
-              );
+              if (widget.selectedItemIndex != 2) { // Check if not already on Chart
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const ChartScreen()),
+                );
+              }
             },
           ),
           BottomAppBarItem(
-            imagePath: 'assets/images/user.png', // Replace with your user image
+            imagePath: 'assets/images/user.png',
             label: "User",
-            isSelected: false, // No selection state for User
+            isSelected: false,
             onClick: () {
               // Handle User click
             },

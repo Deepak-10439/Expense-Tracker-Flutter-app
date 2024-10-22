@@ -123,7 +123,7 @@ class HomeScreen extends StatelessWidget {
              ),
           ],
         ),
-        bottomNavigationBar: const BottomBar(),
+        bottomNavigationBar: const BottomBar(selectedItemIndex: 0,),
       ),
     );
   }
