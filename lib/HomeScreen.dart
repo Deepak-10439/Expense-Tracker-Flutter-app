@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'CardDetails.dart';
 import 'expensedetails.dart';
+import 'Bottombar.dart'; // Import the BottomBar
 
 class HomeScreen extends StatelessWidget {
   final Function(NavigatorState)? navController;
@@ -20,7 +21,7 @@ class HomeScreen extends StatelessWidget {
                 width: 40,
                 height: 40,
                 decoration: BoxDecoration(
-                  color: Color(0xFFF3F3F3),
+                  color: const Color(0xFFF3F3F3),
                   borderRadius: BorderRadius.circular(15),
                 ),
                 child: Padding(
@@ -113,6 +114,7 @@ class HomeScreen extends StatelessWidget {
               ],
             ),
           ),
+          const BottomBar(), // Add the BottomBar here
         ],
       ),
     );
