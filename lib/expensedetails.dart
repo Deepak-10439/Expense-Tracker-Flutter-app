@@ -1,21 +1,6 @@
 import 'package:flutter/material.dart';
-
-// Data class equivalent in Dart
-class TransactionData {
-  final String source;
-  final String amount;
-  final String date;
-  final String mode;
-  final bool isIncome;
-
-  TransactionData({
-    required this.source,
-    required this.amount,
-    required this.date,
-    required this.mode,
-    required this.isIncome,
-  });
-}
+import 'models/transaction_data.dart'; // Import the new data class
+import 'models/transaction_repository.dart';
 
 // Transaction Item Widget
 class TransactionItem extends StatelessWidget {
@@ -73,7 +58,6 @@ class TransactionItem extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 8.0),
           // Row for date and mode
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -124,7 +108,7 @@ class TransactionsList extends StatelessWidget {
           children: [
             TransactionItem(
               source: transaction.source,
-              amount: transaction.amount,
+              amount: transaction.amount.toString(),
               date: transaction.date,
               mode: transaction.mode,
               isIncome: transaction.isIncome,
@@ -142,17 +126,7 @@ class TransactionsListPreview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final sampleTransactions = [
-      TransactionData(source: "Odunayo", amount: "400", date: "09 May, 2022", mode: "Credit", isIncome: true),
-      TransactionData(source: "Olayemi", amount: "200.45", date: "07 May, 2022", mode: "Transfer", isIncome: false),
-      TransactionData(source: "Tasty Fried Chicken", amount: "50.32", date: "08 May, 2022", mode: "Debit Card", isIncome: false),
-      TransactionData(source: "Nescafe", amount: "12.12", date: "09 May, 2022", mode: "Debit Card", isIncome: false),
-      TransactionData(source: "Odunayo", amount: "400", date: "09 May, 2022", mode: "Credit", isIncome: true),
-      TransactionData(source: "Olayemi", amount: "200.45", date: "07 May, 2022", mode: "Transfer", isIncome: false),
-      TransactionData(source: "Tasty Fried Chicken", amount: "50.32", date: "08 May, 2022", mode: "Debit Card", isIncome: false),
-      TransactionData(source: "Nescafe", amount: "12.12", date: "09 May, 2022", mode: "Debit Card", isIncome: false),
-      TransactionData(source: "Odunayo", amount: "400", date: "09 May, 2022", mode: "Credit", isIncome: true),
-    ];
+    final transactions = TransactionRepository().transactions;
 
     return Scaffold(
       appBar: AppBar(title: const Text('Transactions')),
@@ -160,7 +134,7 @@ class TransactionsListPreview extends StatelessWidget {
         children: [
           // Other widgets can be added here if needed
           Expanded(
-            child: TransactionsList(transactions: sampleTransactions),
+            child: TransactionsList(transactions: transactions),
           ),
         ],
       ),

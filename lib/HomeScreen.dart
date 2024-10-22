@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'CardDetails.dart';
 import 'expensedetails.dart';
-import 'Bottombar.dart'; // Import the BottomBar
+import 'Bottombar.dart';
+import 'models/transaction_repository.dart';
 
 class HomeScreen extends StatelessWidget {
   final Function(NavigatorState)? navController;
@@ -10,10 +11,12 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final transactions = TransactionRepository().transactions;
+
     return Scaffold(
       body: Column(
         children: [
-          const SizedBox(height: 80), // Spacer equivalent
+          const SizedBox(height: 40),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -75,10 +78,10 @@ class HomeScreen extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 30), // Spacer equivalent
-          const Expanded(
+          Expanded(
             child: Column(
               children: [
-                Row(
+                const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Padding(
@@ -107,16 +110,15 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                // SizedBox(height: 0), // Spacer equivalent
                 Expanded(
-                  child: TransactionsListPreview(),
+                  child: TransactionsList(transactions: transactions),
                 ),
               ],
             ),
           ),
-          const BottomBar(), // Add the BottomBar here
         ],
       ),
+      bottomNavigationBar: const BottomBar(),
     );
   }
 }

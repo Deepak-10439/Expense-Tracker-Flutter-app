@@ -1,6 +1,8 @@
 // ignore_for_file: library_private_types_in_public_api
 
 import 'package:flutter/material.dart';
+import 'homeScreen.dart';
+import 'chartscreen.dart';
 
 class BottomBar extends StatefulWidget {
   const BottomBar({super.key});
@@ -32,6 +34,10 @@ class _BottomBarState extends State<BottomBar> {
               setState(() {
                 selectedItemIndex = 0;
               });
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const HomeScreen()),
+              );
             },
           ),
           BottomAppBarItem(
@@ -52,6 +58,10 @@ class _BottomBarState extends State<BottomBar> {
               setState(() {
                 selectedItemIndex = 2;
               });
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const ChartScreen()),
+              );
             },
           ),
           BottomAppBarItem(
