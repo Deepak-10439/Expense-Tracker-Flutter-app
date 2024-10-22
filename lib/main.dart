@@ -1,4 +1,4 @@
-import 'package:expense_tracker_flutter/HomeScreen.dart';
+import 'package:expense_tracker_flutter/homeScreen.dart';
 import 'package:flutter/material.dart';
 
 void main() {

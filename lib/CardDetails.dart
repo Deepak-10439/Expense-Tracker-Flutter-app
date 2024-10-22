@@ -7,12 +7,12 @@ class CardFrame extends StatelessWidget {
   final double height;
 
   const CardFrame({
-    Key? key,
+    super.key,
     required this.backgroundColor,
     required this.rotationZ,
     required this.width,
     required this.height,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
