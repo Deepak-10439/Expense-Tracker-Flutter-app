@@ -59,7 +59,7 @@ class CardFrame extends StatelessWidget {
               left: 22,
               top: 35,
               child: Text(
-                '\₹23,345.43',
+                '₹23,345.43',
                 style: TextStyle(
                   color: Color(0xFF323232),
                   fontSize: 24,
@@ -84,7 +84,7 @@ class CardFrame extends StatelessWidget {
                         height: 30,
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: Color(0xFF575757).withOpacity(0.44),
+                          color: const Color(0xFF575757).withOpacity(0.44),
                         ),
                       ),
                     ),

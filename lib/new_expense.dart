@@ -19,8 +19,10 @@ class NewExpense extends StatefulWidget {
 class _NewExpenseState extends State<NewExpense> {
   final _titleController = TextEditingController();
   final _amountController = TextEditingController();
+  final _incomeAmountController = TextEditingController();
   Category _selectedCategory = Category.food;
   DateTime? _selectedDate;
+  DateTime? _selectedIncomeDate;
 
   void _presentDatePicker() async {
     final now = DateTime.now();
@@ -36,6 +38,23 @@ class _NewExpenseState extends State<NewExpense> {
         lastDate: now);
     setState(() {
       _selectedDate = pickedDate;
+    });
+  }
+
+  void _presentIncomeDatePicker() async {
+    final now = DateTime.now();
+    final firstDate = DateTime(
+      now.year - 1,
+      now.month,
+      now.day,
+    );
+    final pickedDate = await showDatePicker(
+        context: context,
+        initialDate: now,
+        firstDate: firstDate,
+        lastDate: now);
+    setState(() {
+      _selectedIncomeDate = pickedDate;
     });
   }
 
@@ -89,6 +108,7 @@ class _NewExpenseState extends State<NewExpense> {
     final transactionRepo = Provider.of<TransactionRepository>(context, listen: false);
     transactionRepo.addTransaction(
       TransactionData(
+        id: '', // Firestore will generate an ID
         source: _titleController.text,
         amount: enteredAmount,
         date: _selectedDate!,
@@ -98,14 +118,31 @@ class _NewExpenseState extends State<NewExpense> {
       ),
     );
 
-    widget.onAddExpense(
-      Expense(
-        title: _titleController.text,
+    Navigator.pop(context);
+  }
+
+  void _submitIncomeData() {
+    final enteredAmount = double.tryParse(_incomeAmountController.text);
+    final amountIsInvalid = enteredAmount == null || enteredAmount <= 0;
+    if (amountIsInvalid || _selectedIncomeDate == null) {
+      _showDialog();
+      return;
+    }
+    
+    // Add the new income to the repository using Provider
+    final transactionRepo = Provider.of<TransactionRepository>(context, listen: false);
+    transactionRepo.addTransaction(
+      TransactionData(
+        id: '', // Firestore will generate an ID
+        source: 'Income',
         amount: enteredAmount,
-        date: _selectedDate!,
-        category: _selectedCategory,
+        date: _selectedIncomeDate!,
+        mode: "Income",
+        isIncome: true,
+        category: 'Income',
       ),
     );
+
     Navigator.pop(context);
   }
 
@@ -113,6 +150,7 @@ class _NewExpenseState extends State<NewExpense> {
   void dispose() {
     _titleController.dispose();
     _amountController.dispose();
+    _incomeAmountController.dispose();
     super.dispose();
   }
 
@@ -156,7 +194,7 @@ class _NewExpenseState extends State<NewExpense> {
                           controller: _amountController,
                           keyboardType: TextInputType.number,
                           decoration: const InputDecoration(
-                            prefixText: '\₹ ',
+                            prefixText: '₹ ',
                             label: Text('Amount'),
                           ),
                         ),
@@ -218,7 +256,7 @@ class _NewExpenseState extends State<NewExpense> {
                           controller: _amountController,
                           keyboardType: TextInputType.number,
                           decoration: const InputDecoration(
-                            prefixText: '\₹ ',
+                            prefixText: '₹ ',
                             label: Text('Amount'),
                           ),
                         ),
@@ -303,6 +341,54 @@ class _NewExpenseState extends State<NewExpense> {
                       ),
                     ],
                   ),
+                const SizedBox(height: 32),
+                const Divider(),
+                const SizedBox(height: 16),
+                const Text(
+                  'Add Income',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 16),
+                TextField(
+                  controller: _incomeAmountController,
+                  keyboardType: TextInputType.number,
+                  decoration: const InputDecoration(
+                    prefixText: '₹ ',
+                    label: Text('Income Amount'),
+                  ),
+                ),
+                const SizedBox(height: 16),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        _selectedIncomeDate == null
+                            ? 'Select Date'
+                            : formatter.format(_selectedIncomeDate!),
+                      ),
+                    ),
+                    IconButton(
+                      onPressed: _presentIncomeDatePicker,
+                      icon: const Icon(Icons.calendar_month),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 16),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    TextButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: const Text('Cancel'),
+                    ),
+                    ElevatedButton(
+                      onPressed: _submitIncomeData,
+                      child: const Text('Save Income'),
+                    ),
+                  ],
+                ),
               ],
             ),
           ),
