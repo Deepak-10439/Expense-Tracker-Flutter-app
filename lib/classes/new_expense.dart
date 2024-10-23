@@ -172,7 +172,7 @@ class _NewExpenseState extends State<NewExpense> {
           child: Padding(
             padding: EdgeInsets.fromLTRB(
               16,
-              16,
+              32,
               16,
               keyboardSpace + 16,
             ),

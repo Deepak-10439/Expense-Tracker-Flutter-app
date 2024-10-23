@@ -14,6 +14,7 @@ class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key, this.navController});
 
   @override
+  // ignore: library_private_types_in_public_api
   _HomeScreenState createState() => _HomeScreenState();
 }
 
@@ -153,6 +154,8 @@ class _HomeScreenState extends State<HomeScreen> {
 }
 
 class TransactionsList extends StatelessWidget {
+  const TransactionsList({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Consumer<TransactionRepository>(

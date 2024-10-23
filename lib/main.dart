@@ -11,16 +11,22 @@ void main() async {
   // Ensure Flutter is initialized
   WidgetsFlutterBinding.ensureInitialized();
   
-  // Load environment variables from .env file
-  await dotenv.load(fileName: ".env");
-  
-  // Initialize Firebase with platform-specific options
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
-  
-  // Run the app
-  runApp(const MyApp());
+  try {
+    // Load environment variables from .env file
+    await dotenv.load(fileName: "assets/.env");
+    
+    // Initialize Firebase with platform-specific options
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+    
+    // Run the app
+    runApp(const MyApp());
+  } catch (e) {
+    print('Error during initialization: $e');
+    // You might want to show an error screen here instead of just printing
+    runApp(ErrorApp(error: e.toString()));
+  }
 }
 
 // Root widget of the application
@@ -36,6 +42,24 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         // Set AuthPage as the initial route
         home: AuthPage(),
+      ),
+    );
+  }
+}
+
+// Simple error display widget
+class ErrorApp extends StatelessWidget {
+  final String error;
+
+  const ErrorApp({Key? key, required this.error}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        body: Center(
+          child: Text('An error occurred: $error'),
+        ),
       ),
     );
   }

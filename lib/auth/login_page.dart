@@ -5,6 +5,7 @@ import 'signup_page.dart';
 import '/services/auth_service.dart';
 import 'auth_success_animation.dart';
 
+// ignore: must_be_immutable
 class LoginPage extends StatelessWidget {
   Color buttonColor = Colors.grey.shade50;
   Color textColor = Colors.black87;
@@ -24,7 +25,7 @@ class LoginPage extends StatelessWidget {
             children: [
               //Logo
               Text(
-                "App Logo",
+                "Expense Tracker",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: Colors.teal,
@@ -81,6 +82,7 @@ class LoginPage extends StatelessWidget {
                               _emailController.text, _passwordController.text);
                           if (success) {
                             Navigator.pushReplacement(
+                              // ignore: use_build_context_synchronously
                               context,
                               MaterialPageRoute(builder: (context) => AuthSuccessAnimation()),
                             );
@@ -146,6 +148,7 @@ class LoginPage extends StatelessWidget {
                   bool success = await AuthServices.new().signInWithGoogle();
                   if (success) {
                     Navigator.pushReplacement(
+                      // ignore: use_build_context_synchronously
                       context,
                       MaterialPageRoute(builder: (context) => AuthSuccessAnimation()),
                     );

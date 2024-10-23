@@ -38,8 +38,6 @@ class AuthServices {
       );
       return true;
     } catch (e) {
-      // Print the error and return false if sign-in fails
-      print(e);
       return false;
     }
   }
@@ -55,8 +53,6 @@ class AuthServices {
       );
       return true;
     } catch (e) {
-      // Print the error and return false if registration fails
-      print(e);
       return false;
     }
   }
@@ -73,8 +69,6 @@ class AuthServices {
       await GoogleSignIn().signOut();
       return true;
     } catch (e) {
-      // Print error message and return false if sign-out fails
-      print("Error while signout!");
       return false;
     }
   }

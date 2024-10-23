@@ -25,7 +25,7 @@ class SignupPage extends StatelessWidget {
             children: [
               // App logo
               Text(
-                "App Logo",
+                "Expense Tracker",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: Colors.teal,
