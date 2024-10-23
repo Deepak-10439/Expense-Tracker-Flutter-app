@@ -11,11 +11,8 @@ class AuthPage extends StatelessWidget {
     return Scaffold(
       body: StreamBuilder<User?>(
         stream: FirebaseAuth.instance.authStateChanges(),
-        builder: (contest, snapshot) {
-          print("New Changes: $snapshot");
+        builder: (context, snapshot) {
           if (snapshot.hasData) {
-            print("User Data: ${snapshot.data}");
-
             return HomePage();
           } else {
             return LoginPage();

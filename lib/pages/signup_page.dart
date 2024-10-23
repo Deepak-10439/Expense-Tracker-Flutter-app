@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'login_page.dart';
 import '/services/auth_service.dart';
 import '/HomeScreen.dart'; // Add this import
+import 'auth_success_screen.dart';
+import 'auth_success_animation.dart';
 
 class SignupPage extends StatelessWidget {
   Color buttonColor = Colors.grey.shade50;
@@ -82,7 +84,7 @@ class SignupPage extends StatelessWidget {
                           if (success) {
                             Navigator.pushReplacement(
                               context,
-                              MaterialPageRoute(builder: (context) => HomeScreen()),
+                              MaterialPageRoute(builder: (context) => AuthSuccessAnimation()),
                             );
                           }
                         },
@@ -147,7 +149,7 @@ class SignupPage extends StatelessWidget {
                   if (success) {
                     Navigator.pushReplacement(
                       context,
-                      MaterialPageRoute(builder: (context) => HomeScreen()),
+                      MaterialPageRoute(builder: (context) => AuthSuccessScreen()),
                     );
                   }
                 },

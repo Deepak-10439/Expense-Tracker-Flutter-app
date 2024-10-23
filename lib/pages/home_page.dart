@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '/services/auth_service.dart';
+import '/pages/auth_page.dart';
 
 
 class HomePage extends StatelessWidget {
@@ -22,36 +23,43 @@ class HomePage extends StatelessWidget {
                 shape: BoxShape.circle,
                 image: DecorationImage(
                   image: NetworkImage(
-                    user!.photoURL.toString(),
+                    user?.photoURL ?? 'https://via.placeholder.com/150',
                   ),
                   fit: BoxFit.cover,
                 ),
               ),
             ),
-            const SizedBox(
-              height: 25,
-            ),
+            SizedBox(height: 20),
             Text(
-              user!.displayName.toString(),
+              user?.displayName ?? "Welcome!",
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
+            SizedBox(height: 10),
             Text(
-              "Welcome, you have successfully logged in with",
+              "You've successfully logged in with:",
               style: TextStyle(color: Colors.grey[600]),
             ),
             Text(
-              user!.providerData[0].email.toString(),
+              user?.email ?? "N/A",
               style: TextStyle(
                 color: Colors.grey[600],
                 fontWeight: FontWeight.w700,
               ),
             ),
-            const SizedBox(height: 48),
+            SizedBox(height: 40),
             ElevatedButton(
               onPressed: () async {
-                if (await AuthServices.new().signOut()) {}
+                if (await AuthServices.new().signOut()) {
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(builder: (context) => AuthPage()),
+                  );
+                }
               },
               child: Text("Logout"),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.red,
+                padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+              ),
             ),
           ],
         ),
