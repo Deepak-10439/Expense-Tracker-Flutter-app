@@ -23,7 +23,7 @@ class TransactionData {
     return TransactionData(
       id: id,
       source: map['source'],
-      amount: map['amount'],
+      amount: (map['amount'] as num).toDouble(),
       date: (map['date'] as Timestamp).toDate(),
       mode: map['mode'],
       isIncome: map['isIncome'],

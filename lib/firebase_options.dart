@@ -83,4 +83,5 @@ class DefaultFirebaseOptions {
     storageBucket: 'expense-tracker-60d62.appspot.com',
     measurementId: 'G-7ECYHT6CRK',
   );
+
 }
