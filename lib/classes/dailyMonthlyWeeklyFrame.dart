@@ -1,6 +1,7 @@
 // ignore: file_names
 import 'package:flutter/material.dart';
 
+// Widget for displaying Daily/Monthly/Weekly selection frame
 class DailyMonthlyWeeklyFrame extends StatefulWidget {
   const DailyMonthlyWeeklyFrame({super.key});
 
@@ -44,15 +45,15 @@ class _DailyMonthlyWeeklyFrameState extends State<DailyMonthlyWeeklyFrame> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10), // Adjusted padding for better alignment
+      padding: const EdgeInsets.symmetric(horizontal: 10),
       child: Container(
         decoration: BoxDecoration(
           color: const Color(0xff323232),
           borderRadius: BorderRadius.circular(15),
         ),
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10), // More consistent padding
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly, // Evenly distribute space
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             buildOptionRow('Daily'),
             buildOptionRow('Weekly'),

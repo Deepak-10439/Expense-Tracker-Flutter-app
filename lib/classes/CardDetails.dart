@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// Widget for displaying a card frame with balance details
 class CardFrame extends StatelessWidget {
   final Color backgroundColor;
   final double rotationZ;
@@ -27,6 +28,7 @@ class CardFrame extends StatelessWidget {
         ),
         child: Stack(
           children: [
+            // Total Balance text
             const Positioned(
               left: 22,
               top: 10,
@@ -41,9 +43,10 @@ class CardFrame extends StatelessWidget {
                 ),
               ),
             ),
+            // Card number
             const Positioned(
               left: 22,
-              top: 85,  // Adjust this value if needed
+              top: 85,
               child: Text(
                 '**** **** **** 1234',
                 style: TextStyle(
@@ -55,6 +58,7 @@ class CardFrame extends StatelessWidget {
                 ),
               ),
             ),
+            // Balance amount
             const Positioned(
               left: 22,
               top: 35,
@@ -69,6 +73,7 @@ class CardFrame extends StatelessWidget {
                 ),
               ),
             ),
+            // Card logo (two overlapping circles)
             Positioned(
               right: 53,
               bottom: 17,
@@ -77,6 +82,7 @@ class CardFrame extends StatelessWidget {
                 height: 30,
                 child: Stack(
                   children: [
+                    // Right circle
                     Positioned(
                       right: 0,
                       child: Container(
@@ -88,6 +94,7 @@ class CardFrame extends StatelessWidget {
                         ),
                       ),
                     ),
+                    // Left circle
                     Positioned(
                       left: 0,
                       child: Container(
@@ -110,6 +117,7 @@ class CardFrame extends StatelessWidget {
   }
 }
 
+// Widget for displaying a background frame for the card
 class CardBackgroundFrame1 extends StatelessWidget {
   const CardBackgroundFrame1({super.key});
 

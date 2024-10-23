@@ -3,16 +3,11 @@
 import 'package:firebase_core/firebase_core.dart' show FirebaseOptions;
 import 'package:flutter/foundation.dart'
     show defaultTargetPlatform, kIsWeb, TargetPlatform;
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 /// Default [FirebaseOptions] for use with your Firebase apps.
-///
-/// Example:
-// /// ```dart
-// await Firebase.initializeApp(
-//     options = DefaultFirebaseOptions.currentPlatform,
-// );
-/// ```
 class DefaultFirebaseOptions {
+  // Returns the appropriate FirebaseOptions based on the current platform
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
       return web;
@@ -38,16 +33,19 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyDGPtAQwV_FlUPexNAQl3hEkZcxC7kJK3w',
-    appId: '1:403201579600:web:4e9ea286094fdb06d98f55',
-    messagingSenderId: '403201579600',
-    projectId: 'expense-tracker-60d62',
-    authDomain: 'expense-tracker-60d62.firebaseapp.com',
-    storageBucket: 'expense-tracker-60d62.appspot.com',
-    measurementId: 'G-S65BPZH7LB',
-  );
+  // Web-specific Firebase configuration
+  // Uses environment variables for sensitive information
+  static FirebaseOptions get web => FirebaseOptions(
+        apiKey: dotenv.env['FIREBASE_WEB_API_KEY'] ?? '',
+        appId: dotenv.env['FIREBASE_WEB_APP_ID'] ?? '',
+        messagingSenderId: dotenv.env['FIREBASE_WEB_MESSAGING_SENDER_ID'] ?? '',
+        projectId: dotenv.env['FIREBASE_WEB_PROJECT_ID'] ?? '',
+        authDomain: dotenv.env['FIREBASE_WEB_AUTH_DOMAIN'] ?? '',
+        storageBucket: dotenv.env['FIREBASE_WEB_STORAGE_BUCKET'] ?? '',
+        measurementId: dotenv.env['FIREBASE_WEB_MEASUREMENT_ID'] ?? '',
+      );
 
+  // Android-specific Firebase configuration
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyCjpY83pHoj8eP0qKBJUVS7kHVHgLRhQ9c',
     appId: '1:403201579600:android:499a6c9ae90fca93d98f55',
@@ -56,6 +54,7 @@ class DefaultFirebaseOptions {
     storageBucket: 'expense-tracker-60d62.appspot.com',
   );
 
+  // iOS-specific Firebase configuration
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyCKGQOV7YT0611t9ltQxOQU4ZfioPHWxkQ',
     appId: '1:403201579600:ios:8a6f5d0d614b4acdd98f55',
@@ -65,6 +64,7 @@ class DefaultFirebaseOptions {
     iosBundleId: 'com.example.expenseTrackerFlutter',
   );
 
+  // macOS-specific Firebase configuration
   static const FirebaseOptions macos = FirebaseOptions(
     apiKey: 'AIzaSyCKGQOV7YT0611t9ltQxOQU4ZfioPHWxkQ',
     appId: '1:403201579600:ios:8a6f5d0d614b4acdd98f55',
@@ -74,6 +74,7 @@ class DefaultFirebaseOptions {
     iosBundleId: 'com.example.expenseTrackerFlutter',
   );
 
+  // Windows-specific Firebase configuration
   static const FirebaseOptions windows = FirebaseOptions(
     apiKey: 'AIzaSyDGPtAQwV_FlUPexNAQl3hEkZcxC7kJK3w',
     appId: '1:403201579600:web:ed6b382bc036cbb6d98f55',
@@ -83,5 +84,4 @@ class DefaultFirebaseOptions {
     storageBucket: 'expense-tracker-60d62.appspot.com',
     measurementId: 'G-7ECYHT6CRK',
   );
-
 }

@@ -1,20 +1,18 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
-import 'login_page.dart';
+import 'signup_page.dart';
 import '/services/auth_service.dart';
-import '/HomeScreen.dart'; // Add this import
-import 'auth_success_screen.dart';
 import 'auth_success_animation.dart';
 
-class SignupPage extends StatelessWidget {
+class LoginPage extends StatelessWidget {
   Color buttonColor = Colors.grey.shade50;
   Color textColor = Colors.black87;
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-  SignupPage({super.key});
+  LoginPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -75,11 +73,11 @@ class SignupPage extends StatelessWidget {
                           return null;
                         },
                       ),
-                      SizedBox(height: 16.0),
+                      SizedBox(height: 30.0),
                       // Login button
                       GestureDetector(
                         onTap: () async {
-                          bool success = await AuthServices.new().registerWithEmailPassword(
+                          bool success = await AuthServices.new().signInWithEmailPassword(
                               _emailController.text, _passwordController.text);
                           if (success) {
                             Navigator.pushReplacement(
@@ -102,7 +100,7 @@ class SignupPage extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               Text(
-                                "Sign Up",
+                                "Login",
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 16,
@@ -118,7 +116,7 @@ class SignupPage extends StatelessWidget {
                 ),
               ),
 
-              const SizedBox(height: 30),
+              const SizedBox(height: 16),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
@@ -149,7 +147,7 @@ class SignupPage extends StatelessWidget {
                   if (success) {
                     Navigator.pushReplacement(
                       context,
-                      MaterialPageRoute(builder: (context) => AuthSuccessScreen()),
+                      MaterialPageRoute(builder: (context) => AuthSuccessAnimation()),
                     );
                   }
                 },
@@ -174,16 +172,16 @@ class SignupPage extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text("Already have an account? "),
+                  Text("Don't have account? "),
                   GestureDetector(
                     onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => LoginPage(),
+                        builder: (context) => SignupPage(),
                       ),
                     ),
                     child: Text(
-                      "Login",
+                      "Sign Up",
                       style: TextStyle(
                           color: Colors.blue, fontWeight: FontWeight.bold),
                     ),

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'CardDetails.dart';
-import 'expensedetails.dart';
-import 'Bottombar.dart';
-import 'models/transaction_repository.dart';
-import 'models/transaction_data.dart';
-import 'edit_transaction_screen.dart';
+import '../classes/CardDetails.dart';
+import '../classes/expensedetails.dart';
+import '../classes/Bottombar.dart';
+import '../models/transaction_repository.dart';
+import '../models/transaction_data.dart';
+import '../classes/edit_transaction_screen.dart';
 import 'package:intl/intl.dart'; // Make sure to import this for date formatting
 
 class HomeScreen extends StatefulWidget {
@@ -14,7 +14,6 @@ class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key, this.navController});
 
   @override
-  // ignore: library_private_types_in_public_api
   _HomeScreenState createState() => _HomeScreenState();
 }
 
@@ -22,6 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
+    // Fetch transactions when the screen is initialized
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Provider.of<TransactionRepository>(context, listen: false).fetchTransactions();
     });
@@ -35,6 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
         body: Column(
           children: [
             const SizedBox(height: 40),
+            // App bar with menu icon and title
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -67,6 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
             const SizedBox(height: 30), // Spacer equivalent
+            // Stack of card frames for visual effect
             const Stack(
               children: [
                 Positioned(
@@ -96,50 +98,54 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
             const SizedBox(height: 30), // Spacer equivalent
+            // Recent activity section
             Expanded(
-               child: Consumer<TransactionRepository>(
-                 builder: (context, transactionRepo, child) {
-                   return Column(
-                     children: [
-                       const Row(
-                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                         children: [
-                           Padding(
-                             padding: EdgeInsets.only(left: 25.0),
-                             child: Text(
-                               "Recent Activity",
-                               style: TextStyle(
-                                 fontSize: 16.0,
-                                 fontWeight: FontWeight.w600,
-                                 color: Color(0xFF3F3F3F),
-                                 letterSpacing: 0.1,
-                               ),
-                             ),
-                           ),
-                           Padding(
-                             padding: EdgeInsets.only(right: 25.0),
-                             child: Text(
-                               "View All",
-                               style: TextStyle(
-                                 fontSize: 16.0,
-                                 fontWeight: FontWeight.w600,
-                                 color: Color(0xFF575757),
-                                 letterSpacing: 0.1,
-                               ),
-                             ),
-                           ),
-                         ],
-                       ),
-                       Expanded(
-                         child: TransactionsList(),
-                       ),
-                     ],
-                   );
-                 },
-               ),
-             ),
+              child: Consumer<TransactionRepository>(
+                builder: (context, transactionRepo, child) {
+                  return Column(
+                    children: [
+                      // Header for recent activity
+                      const Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(left: 25.0),
+                            child: Text(
+                              "Recent Activity",
+                              style: TextStyle(
+                                fontSize: 16.0,
+                                fontWeight: FontWeight.w600,
+                                color: Color(0xFF3F3F3F),
+                                letterSpacing: 0.1,
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(right: 25.0),
+                            child: Text(
+                              "View All",
+                              style: TextStyle(
+                                fontSize: 16.0,
+                                fontWeight: FontWeight.w600,
+                                color: Color(0xFF575757),
+                                letterSpacing: 0.1,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      // List of recent transactions
+                      Expanded(
+                        child: TransactionsList(),
+                      ),
+                    ],
+                  );
+                },
+              ),
+            ),
           ],
         ),
+        // Bottom navigation bar with "Home" tab selected
         bottomNavigationBar: const BottomBar(selectedItemIndex: 0,),
       ),
     );

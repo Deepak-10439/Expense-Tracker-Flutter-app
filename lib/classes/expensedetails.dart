@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart'; // Import the intl package
-import 'models/transaction_data.dart'; // Import the new data class
-import 'models/transaction_repository.dart';
+import '../models/transaction_data.dart'; // Import the new data class
+import '../models/transaction_repository.dart';
 
 // Transaction Item Widget
 class TransactionItem extends StatelessWidget {
@@ -143,6 +143,7 @@ class TransactionsListPreview extends StatelessWidget {
     );
   }
 }
+
 
 
 

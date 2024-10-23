@@ -1,33 +1,37 @@
 import 'package:flutter/material.dart';
-import '/HomeScreen.dart';  // Import HomeScreen instead of home_page.dart
+import '../Screens/HomeScreen.dart';
 
-class AuthSuccessAnimation extends StatefulWidget {
-  const AuthSuccessAnimation({Key? key}) : super(key: key);
+// Widget to show a success screen after authentication
+class AuthSuccessScreen extends StatefulWidget {
+  const AuthSuccessScreen({Key? key}) : super(key: key);
 
   @override
-  _AuthSuccessAnimationState createState() => _AuthSuccessAnimationState();
+  _AuthSuccessScreenState createState() => _AuthSuccessScreenState();
 }
 
-class _AuthSuccessAnimationState extends State<AuthSuccessAnimation> with SingleTickerProviderStateMixin {
+class _AuthSuccessScreenState extends State<AuthSuccessScreen> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _scaleAnimation;
 
   @override
   void initState() {
     super.initState();
+    // Initialize animation controller
     _controller = AnimationController(
       duration: const Duration(milliseconds: 1000),
       vsync: this,
     );
 
+    // Create scale animation
     _scaleAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
       CurvedAnimation(parent: _controller, curve: Curves.elasticOut),
     );
 
+    // Start animation and navigate to HomeScreen after delay
     _controller.forward().then((_) {
-      Future.delayed(Duration(seconds: 2), () {  // Increased delay to 2 seconds
+      Future.delayed(Duration(seconds: 1), () {
         Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => HomeScreen()),  // Navigate to HomeScreen
+          MaterialPageRoute(builder: (context) => HomeScreen()),
         );
       });
     });

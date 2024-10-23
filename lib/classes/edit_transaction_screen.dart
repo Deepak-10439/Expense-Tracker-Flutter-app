@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'models/transaction_data.dart';
-import 'models/transaction_repository.dart';
-import 'models/expenses.dart';
+import '../models/transaction_data.dart';
+import '../models/transaction_repository.dart';
+import '../models/expenses.dart';
 
+// Screen for editing an existing transaction
 class EditTransactionScreen extends StatefulWidget {
   final TransactionData transaction;
 
@@ -23,6 +24,7 @@ class _EditTransactionScreenState extends State<EditTransactionScreen> {
   @override
   void initState() {
     super.initState();
+    // Initialize controllers and state variables with existing transaction data
     _titleController = TextEditingController(text: widget.transaction.source);
     _amountController = TextEditingController(text: widget.transaction.amount.toString());
     _selectedDate = widget.transaction.date;
@@ -37,6 +39,7 @@ class _EditTransactionScreenState extends State<EditTransactionScreen> {
     super.dispose();
   }
 
+  // Show date picker and update selected date
   void _presentDatePicker() async {
     final pickedDate = await showDatePicker(
       context: context,
@@ -51,6 +54,7 @@ class _EditTransactionScreenState extends State<EditTransactionScreen> {
     }
   }
 
+  // Submit changes to the transaction
   void _submitChanges() {
     final enteredAmount = double.tryParse(_amountController.text);
     if (_titleController.text.isEmpty || enteredAmount == null || enteredAmount <= 0) {
@@ -88,17 +92,20 @@ class _EditTransactionScreenState extends State<EditTransactionScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            // Title input
             TextField(
               controller: _titleController,
               decoration: InputDecoration(labelText: 'Title'),
             ),
             SizedBox(height: 16),
+            // Amount input
             TextField(
               controller: _amountController,
               decoration: InputDecoration(labelText: 'Amount'),
               keyboardType: TextInputType.number,
             ),
             SizedBox(height: 16),
+            // Date picker
             Row(
               children: [
                 Expanded(
@@ -113,6 +120,7 @@ class _EditTransactionScreenState extends State<EditTransactionScreen> {
               ],
             ),
             SizedBox(height: 16),
+            // Category dropdown
             DropdownButton<String>(
               value: _selectedCategory,
               items: [
@@ -132,6 +140,7 @@ class _EditTransactionScreenState extends State<EditTransactionScreen> {
               },
             ),
             SizedBox(height: 32),
+            // Save changes button
             ElevatedButton(
               onPressed: _submitChanges,
               child: Text('Save Changes'),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'models/transaction_repository.dart';
+import '../models/transaction_repository.dart';
 
 // Data model to represent income and expense summary
 class ExpenseSummaryData {
@@ -10,6 +10,7 @@ class ExpenseSummaryData {
   ExpenseSummaryData({required this.type, required this.amount});
 }
 
+// Widget for displaying income and expense summary
 class IncomeExpenseSummary extends StatelessWidget {
   const IncomeExpenseSummary({super.key});
 

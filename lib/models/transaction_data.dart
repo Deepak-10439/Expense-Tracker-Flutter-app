@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+// Model class for transaction data
 class TransactionData {
   final String id;
   final String source;
@@ -9,6 +10,7 @@ class TransactionData {
   final bool isIncome;
   final String category;
 
+  // Constructor
   TransactionData({
     required this.id,
     required this.source,
@@ -19,6 +21,7 @@ class TransactionData {
     required this.category,
   });
 
+  // Factory constructor to create TransactionData from Firestore document
   factory TransactionData.fromMap(Map<String, dynamic> map, String id) {
     return TransactionData(
       id: id,
@@ -31,6 +34,7 @@ class TransactionData {
     );
   }
 
+  // Convert TransactionData to a Map for Firestore storage
   Map<String, dynamic> toMap() {
     return {
       'source': source,

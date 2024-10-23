@@ -2,11 +2,12 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'models/expenses.dart';
-import 'models/transaction_data.dart';
-import 'models/transaction_repository.dart';
+import '../models/expenses.dart';
+import '../models/transaction_data.dart';
+import '../models/transaction_repository.dart';
 import 'package:provider/provider.dart';
 
+// Widget for adding a new expense or income
 class NewExpense extends StatefulWidget {
   final void Function(Expense) onAddExpense;
   const NewExpense(this.onAddExpense, {super.key});
@@ -24,6 +25,7 @@ class _NewExpenseState extends State<NewExpense> {
   DateTime? _selectedDate;
   DateTime? _selectedIncomeDate;
 
+  // Show date picker for expense
   void _presentDatePicker() async {
     final now = DateTime.now();
     final firstDate = DateTime(
@@ -41,6 +43,7 @@ class _NewExpenseState extends State<NewExpense> {
     });
   }
 
+  // Show date picker for income
   void _presentIncomeDatePicker() async {
     final now = DateTime.now();
     final firstDate = DateTime(
@@ -58,6 +61,7 @@ class _NewExpenseState extends State<NewExpense> {
     });
   }
 
+  // Show error dialog
   void _showDialog() {
     if (Platform.isIOS) {
       showCupertinoDialog(
@@ -94,6 +98,7 @@ class _NewExpenseState extends State<NewExpense> {
     }
   }
 
+  // Submit expense data
   void _submitExpenseData() {
     final enteredAmount = double.tryParse(_amountController.text);
     final amountIsInvalid = enteredAmount == null || enteredAmount <= 0;
@@ -121,6 +126,7 @@ class _NewExpenseState extends State<NewExpense> {
     Navigator.pop(context);
   }
 
+  // Submit income data
   void _submitIncomeData() {
     final enteredAmount = double.tryParse(_incomeAmountController.text);
     final amountIsInvalid = enteredAmount == null || enteredAmount <= 0;
@@ -172,6 +178,7 @@ class _NewExpenseState extends State<NewExpense> {
             ),
             child: Column(
               children: [
+                // Expense input fields
                 if (width >= 600)
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,

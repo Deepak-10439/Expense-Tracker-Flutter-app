@@ -2,24 +2,27 @@
 
 import 'package:flutter/material.dart';
 import 'new_expense.dart';
-import 'models/expenses.dart';
-import 'HomeScreen.dart';
-import 'chartscreen.dart';
+import '../models/expenses.dart';
+import '../Screens/HomeScreen.dart';
+import '../Screens/chartscreen.dart';
 
 
 class BottomBar extends StatefulWidget {
-  final int selectedItemIndex; // Add this line
+  final int selectedItemIndex; // Index of the currently selected item
 
-  const BottomBar({super.key, required this.selectedItemIndex}); // Update constructor
+  const BottomBar({super.key, required this.selectedItemIndex});
 
   @override
   _BottomBarState createState() => _BottomBarState();
 }
 
 class _BottomBarState extends State<BottomBar> {
+  // Method to add a new expense (currently empty)
   void _addNewExpense(BuildContext context, Expense newExpense) {
-    
+    // TODO: Implement adding new expense
   }
+
+  // Method to open the add expense overlay
   void _openAddExpenseOverlay(BuildContext context) {
     showModalBottomSheet(
       context: context,
@@ -48,6 +51,7 @@ class _BottomBarState extends State<BottomBar> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
+          // Home button
           BottomAppBarItem(
             imagePath: widget.selectedItemIndex == 0
                 ? 'assets/images/home_outlined.png'
@@ -55,7 +59,8 @@ class _BottomBarState extends State<BottomBar> {
             label: "Home",
             isSelected: widget.selectedItemIndex == 0,
             onClick: () {
-              if (widget.selectedItemIndex != 0) { // Check if not already on Home
+              // Navigate to HomeScreen if not already there
+              if (widget.selectedItemIndex != 0) {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => const HomeScreen()),
@@ -63,6 +68,7 @@ class _BottomBarState extends State<BottomBar> {
               }
             },
           ),
+          // Add button
           BottomAppBarItem(
             imagePath: 'assets/images/add.png',
             label: "Add",
@@ -71,6 +77,7 @@ class _BottomBarState extends State<BottomBar> {
               _openAddExpenseOverlay(context);
             },
           ),
+          // Chart button
           BottomAppBarItem(
             imagePath: widget.selectedItemIndex == 2
                 ? 'assets/images/chart_selected.png'
@@ -78,7 +85,8 @@ class _BottomBarState extends State<BottomBar> {
             label: "Chart",
             isSelected: widget.selectedItemIndex == 2,
             onClick: () {
-              if (widget.selectedItemIndex != 2) { // Check if not already on Chart
+              // Navigate to ChartScreen if not already there
+              if (widget.selectedItemIndex != 2) {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => const ChartScreen()),
@@ -86,12 +94,13 @@ class _BottomBarState extends State<BottomBar> {
               }
             },
           ),
+          // User button
           BottomAppBarItem(
             imagePath: 'assets/images/user.png',
             label: "User",
             isSelected: false,
             onClick: () {
-              // Handle User click
+              // TODO: Handle User click
             },
           ),
         ],

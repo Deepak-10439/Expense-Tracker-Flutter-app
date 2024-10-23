@@ -1,16 +1,37 @@
 # expense_tracker_flutter
 
-A new Flutter project.
+The Expense Tracker is a mobile app built with Flutter, designed to help you manage your finances effortlessly. It leverages Firebase services to deliver key features such as:
 
-## Getting Started
+## Features
 
-This project is a starting point for a Flutter application.
+- Track your daily expenses
+- Categorize expenses for better insights
+- Visualize spending patterns with charts
+- Secure login with Firebase Authentication
+- Sync data across devices with Cloud Firestore
 
-A few resources to get you started if this is your first Flutter project:
+## Installation
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+1. **Clone the repository:**
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+   ```bash
+   git clone https://github.com/Deepak-10439/Expense-Tracker-Flutter-app.git
+   cd expense_tracker_flutter
+   ```
+
+2. **Install dependencies:**
+
+   ```bash
+   flutter pub get
+   ```
+
+3. **Run the app:**
+
+   ```bash
+   flutter run
+   ```
+
+## Configuration
+
+- Ensure you have Flutter installed. Follow the [official guide](https://flutter.dev/docs/get-started/install) to set it up.
+- Set up Firebase for authentication and database. Refer to the `firebase.json` file for configuration details.

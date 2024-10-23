@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'pieChart.dart'; 
-import 'expenseSummary.dart'; 
-import 'dailyMonthlyWeeklyFrame.dart'; 
-import 'Bottombar.dart';
-import 'new_expense.dart';
-import 'models/expenses.dart';
-import 'models/transaction_repository.dart';
+import '../classes/pieChart.dart'; 
+import '../classes/expenseSummary.dart'; 
+import '../classes/dailyMonthlyWeeklyFrame.dart'; 
+import '../classes/Bottombar.dart';
+import '../classes/new_expense.dart';
+import '../models/expenses.dart';
+import '../models/transaction_repository.dart';
 
 class ChartScreen extends StatefulWidget {
   const ChartScreen({super.key});
@@ -25,11 +25,13 @@ class _ChartScreenState extends State<ChartScreen> {
     });
   }
 
+  // Function to add a new expense
   void _addNewExpense(BuildContext context, Expense newExpense) {
-    // Implement the logic to add the new expense
+    // TODO: Implement the logic to add the new expense
     // For example, you might want to update a list or database
   }
 
+  // Function to open the add expense overlay
   void _openAddExpenseOverlay(BuildContext context) {
     showModalBottomSheet(
       context: context,
@@ -55,6 +57,7 @@ class _ChartScreenState extends State<ChartScreen> {
       body: Column(
         children: [
           const SizedBox(height: 40),
+          // App bar with back button, title, and add button
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -79,17 +82,20 @@ class _ChartScreenState extends State<ChartScreen> {
             ],
           ),
           const SizedBox(height: 30),
+          // Widget for selecting daily/monthly/weekly view
           const DailyMonthlyWeeklyFrame(),
           const SizedBox(height: 30),
           Expanded(
             child: SingleChildScrollView(
               child: Column(
                 children: [
+                  // Display income and expense summary
                   Consumer<TransactionRepository>(
                     builder: (context, transactionRepo, child) {
                       return IncomeExpenseSummary();
                     },
                   ),
+                  // Display pie chart of expenses
                   Consumer<TransactionRepository>(
                     builder: (context, transactionRepo, child) {
                       return PieChartPreview();

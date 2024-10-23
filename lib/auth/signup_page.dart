@@ -1,20 +1,19 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
-import 'signup_page.dart';
+import 'login_page.dart';
 import '/services/auth_service.dart';
-import '/HomeScreen.dart';
 import 'auth_success_screen.dart';
 import 'auth_success_animation.dart';
 
-class LoginPage extends StatelessWidget {
+class SignupPage extends StatelessWidget {
   Color buttonColor = Colors.grey.shade50;
   Color textColor = Colors.black87;
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-  LoginPage({super.key});
+  SignupPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +23,7 @@ class LoginPage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              //Logo
+              // App logo
               Text(
                 "App Logo",
                 textAlign: TextAlign.center,
@@ -37,6 +36,7 @@ class LoginPage extends StatelessWidget {
 
               const SizedBox(height: 35),
 
+              // Sign up form
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Form(
@@ -75,13 +75,15 @@ class LoginPage extends StatelessWidget {
                           return null;
                         },
                       ),
-                      SizedBox(height: 30.0),
-                      // Login button
+                      SizedBox(height: 16.0),
+                      // Sign up button
                       GestureDetector(
                         onTap: () async {
-                          bool success = await AuthServices.new().signInWithEmailPassword(
+                          // Attempt to register user
+                          bool success = await AuthServices.new().registerWithEmailPassword(
                               _emailController.text, _passwordController.text);
                           if (success) {
+                            // Navigate to success animation on successful registration
                             Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(builder: (context) => AuthSuccessAnimation()),
@@ -102,7 +104,7 @@ class LoginPage extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               Text(
-                                "Login",
+                                "Sign Up",
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 16,
@@ -118,7 +120,7 @@ class LoginPage extends StatelessWidget {
                 ),
               ),
 
-              const SizedBox(height: 16),
+              const SizedBox(height: 30),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
@@ -142,14 +144,14 @@ class LoginPage extends StatelessWidget {
               ),
               const SizedBox(height: 30),
 
-              //Google login nbutton
+              // Google sign-in button
               GestureDetector(
                 onTap: () async {
                   bool success = await AuthServices.new().signInWithGoogle();
                   if (success) {
                     Navigator.pushReplacement(
                       context,
-                      MaterialPageRoute(builder: (context) => AuthSuccessAnimation()),
+                      MaterialPageRoute(builder: (context) => AuthSuccessScreen()),
                     );
                   }
                 },
@@ -171,19 +173,20 @@ class LoginPage extends StatelessWidget {
                 height: 100,
               ),
 
+              // Link to login page
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text("Don't have account? "),
+                  Text("Already have an account? "),
                   GestureDetector(
                     onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => SignupPage(),
+                        builder: (context) => LoginPage(),
                       ),
                     ),
                     child: Text(
-                      "Sign Up",
+                      "Login",
                       style: TextStyle(
                           color: Colors.blue, fontWeight: FontWeight.bold),
                     ),

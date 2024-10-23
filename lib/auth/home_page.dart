@@ -1,12 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '/services/auth_service.dart';
-import '/pages/auth_page.dart';
+import 'auth_page.dart';
 
 
 class HomePage extends StatelessWidget {
   HomePage({super.key});
 
+  // Get the current user from Firebase Auth
   final user = FirebaseAuth.instance.currentUser;
 
   @override
@@ -16,6 +17,7 @@ class HomePage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            // Display user's profile picture
             Container(
               width: 100,
               height: 100,
@@ -30,11 +32,13 @@ class HomePage extends StatelessWidget {
               ),
             ),
             SizedBox(height: 20),
+            // Display user's name
             Text(
               user?.displayName ?? "Welcome!",
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 10),
+            // Display user's email
             Text(
               "You've successfully logged in with:",
               style: TextStyle(color: Colors.grey[600]),
@@ -47,6 +51,7 @@ class HomePage extends StatelessWidget {
               ),
             ),
             SizedBox(height: 40),
+            // Logout button
             ElevatedButton(
               onPressed: () async {
                 if (await AuthServices.new().signOut()) {

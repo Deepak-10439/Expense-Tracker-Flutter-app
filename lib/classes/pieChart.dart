@@ -1,7 +1,7 @@
 // ignore: file_names
 import 'package:flutter/material.dart';
-import 'models/transaction_repository.dart';
-import 'models/transaction_data.dart';
+import '../models/transaction_repository.dart';
+import '../models/transaction_data.dart';
 
 // Data class for expense data
 class ExpenseData {

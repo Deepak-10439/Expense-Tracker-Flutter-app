@@ -2,7 +2,9 @@ import 'package:flutter/foundation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'transaction_data.dart';
 
+// Repository class for managing transactions
 class TransactionRepository extends ChangeNotifier {
+  // Singleton instance
   static final TransactionRepository _instance = TransactionRepository._internal();
 
   factory TransactionRepository() {
@@ -11,12 +13,15 @@ class TransactionRepository extends ChangeNotifier {
 
   TransactionRepository._internal();
 
+  // Reference to Firestore collection
   final CollectionReference _transactionsCollection = FirebaseFirestore.instance.collection('transactions');
 
   List<TransactionData> _transactions = [];
 
+  // Getter for transactions
   List<TransactionData> get transactions => _transactions;
 
+  // Fetch transactions from Firestore
   Future<void> fetchTransactions() async {
     try {
       QuerySnapshot querySnapshot = await _transactionsCollection.orderBy('date', descending: true).get();
@@ -32,6 +37,7 @@ class TransactionRepository extends ChangeNotifier {
     }
   }
 
+  // Add a new transaction to Firestore
   Future<void> addTransaction(TransactionData transaction) async {
     try {
       await _transactionsCollection.add(transaction.toMap());
@@ -41,6 +47,7 @@ class TransactionRepository extends ChangeNotifier {
     }
   }
 
+  // Update an existing transaction in Firestore
   Future<void> updateTransaction(TransactionData transaction) async {
     try {
       await _transactionsCollection.doc(transaction.id).update(transaction.toMap());
@@ -50,6 +57,7 @@ class TransactionRepository extends ChangeNotifier {
     }
   }
 
+  // Delete a transaction from Firestore
   Future<void> deleteTransaction(String id) async {
     try {
       await _transactionsCollection.doc(id).delete();
@@ -59,6 +67,7 @@ class TransactionRepository extends ChangeNotifier {
     }
   }
 
+  // Add dummy transactions for testing
   Future<void> addDummyTransactions() async {
     for (var transaction in dummyTransactions) {
       await addTransaction(transaction);
@@ -66,6 +75,7 @@ class TransactionRepository extends ChangeNotifier {
   }
 }
 
+// List of dummy transactions for testing
 List<TransactionData> dummyTransactions = [
   TransactionData(
     id: '',
